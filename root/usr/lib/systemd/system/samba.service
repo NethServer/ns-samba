@@ -1,0 +1,16 @@
+[Unit]
+Description=Samba domain controller daemon
+After=syslog.target network.target
+
+[Service]
+LimitNOFILE=16384
+EnvironmentFile=-/etc/sysconfig/samba
+ExecStart=/usr/sbin/samba $SAMBAOPTIONS -i --debug-stderr
+ExecReload=/usr/bin/kill -HUP $MAINPID
+SuccessExitStatus=127
+
+ConditionPathExists=/var/lib/samba/private/krb5.conf
+ConditionPathExists=/etc/samba/smb.conf
+
+[Install]
+WantedBy=multi-user.target
