@@ -29,15 +29,21 @@ This is is a vanilla samba-%{sambaver} build for NethServer 7
 
 %prep
 %setup 
-%setup -T -b 1 -n samba-%{sambaver} 
+%setup -D -T -b 1
 
 %build
+cd %{_builddir}/samba-%{sambaver} 
 %configure --with-systemd --enable-fhs 
 make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
+
+(cd root ; find . -depth -print | cpio -dump %{buildroot})
+
+pushd %{_builddir}/samba-%{sambaver}
 %make_install
+popd
 
 %{genfilelist} %{buildroot} > %{name}-%{version}.filelist
 
