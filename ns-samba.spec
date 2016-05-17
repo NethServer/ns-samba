@@ -1,7 +1,7 @@
-%define sambaver 4.3.6
+%define sambaver 4.4.3
 
 Name:           ns-samba
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
 Summary:        Samba vanilla build
 
@@ -63,6 +63,9 @@ popd
 %systemd_postun
 
 %changelog
+* Tue May 17 2016 Davide Principi <davide.principi@nethesis.it>
+- Bump Samba 4.4.3
+
 * Mon Apr 11 2016 Davide Principi <davide.principi@nethesis.it>
 - Bump Samba 4.3.6
 
