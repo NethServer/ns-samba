@@ -1,8 +1,8 @@
 %define sambaver 4.4.5
 
 Name:           ns-samba
-Version:        0.0.2
-Release:        1%{?dist}
+Version: 1.0.0
+Release: 1%{?dist}
 Summary:        Samba vanilla build
 
 License: GPLv3+
@@ -63,6 +63,9 @@ popd
 %systemd_postun
 
 %changelog
+* Thu Jul 07 2016 Davide Principi <davide.principi@nethesis.it> - 1.0.0-1
+- Bump version 4.4.5
+
 * Tue May 17 2016 Davide Principi <davide.principi@nethesis.it>
 - Bump Samba 4.4.3
 
