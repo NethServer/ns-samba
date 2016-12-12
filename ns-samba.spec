@@ -1,4 +1,4 @@
-%define sambaver 4.4.5
+%define sambaver 4.5.2
 
 Name:           ns-samba
 Version: 1.0.0
