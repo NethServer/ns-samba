@@ -1,9 +1,9 @@
-%define sambaver 4.5.2
+%define sambaver 4.6.0
 
-Name:           ns-samba
-Version: 1.0.1
+Name: ns-samba
+Version: 1.0.2
 Release: 1%{?dist}
-Summary:        Samba vanilla build
+Summary: Samba vanilla build
 
 License: GPLv3+
 URL: %{url_prefix}/%{name}
@@ -63,6 +63,9 @@ popd
 %systemd_postun
 
 %changelog
+* Wed Mar 22 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.2-1
+- Bump version 4.6.0
+
 * Mon Dec 12 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.1-1
 - Bump version 4.5.2
 
