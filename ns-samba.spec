@@ -1,14 +1,12 @@
-%define sambaver 4.6.0
-
 Name: ns-samba
-Version: %{sambaver}
+Version: 4.6.2
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
 License: GPLv3+
 URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
-Source1: https://download.samba.org/pub/samba/stable/samba-%{sambaver}.tar.gz  
+Source1: https://download.samba.org/pub/samba/stable/samba-%{version}.tar.gz
 
 BuildRequires: nethserver-devtools
 BuildRequires: python-devel
@@ -22,17 +20,17 @@ BuildRequires: systemd
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
-
+Requires: bind-utils
 
 %description
-This is is a vanilla samba-%{sambaver} build for NethServer 7
+This is is a vanilla samba-%{version} build for NethServer 7
 
 %prep
 %setup 
 %setup -D -T -b 1
 
 %build
-cd %{_builddir}/samba-%{sambaver} 
+cd %{_builddir}/samba-%{version}
 %configure --with-systemd --enable-fhs 
 make %{?_smp_mflags}
 
@@ -41,7 +39,7 @@ rm -rf %{buildroot}
 
 (cd root ; find . -depth -print | cpio -dump %{buildroot})
 
-pushd %{_builddir}/samba-%{sambaver}
+pushd %{_builddir}/samba-%{version}
 %make_install
 popd
 
@@ -63,6 +61,9 @@ popd
 %systemd_postun
 
 %changelog
+* Mon Apr 10 2017 Davide Principi <davide.principi@nethesis.it> - 4.6.2-1
+- Bump version 4.6.2
+
 * Fri Mar 24 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 4.6.0-1
 - Bump version 4.6.0
 
