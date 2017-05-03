@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.6.2
+Version: 4.6.3
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
@@ -61,6 +61,9 @@ popd
 %systemd_postun
 
 %changelog
+* Wed May 03 2017 Davide Principi <davide.principi@nethesis.it> - 4.6.3-1
+- Bump version 4.6.3
+
 * Mon Apr 10 2017 Davide Principi <davide.principi@nethesis.it> - 4.6.2-1
 - Bump version 4.6.2
 
