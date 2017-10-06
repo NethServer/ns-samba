@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.6.5
+Version: 4.7.0
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
@@ -15,6 +15,7 @@ BuildRequires: gnutls-devel
 BuildRequires: docbook-xsl
 BuildRequires: libacl-devel
 BuildRequires: openldap-devel
+BuildRequires: pam-devel
 
 BuildRequires: systemd
 Requires(post): systemd
@@ -61,6 +62,9 @@ popd
 %systemd_postun
 
 %changelog
+* Fri Oct 06 2017 Davide Principi <davide.principi@nethesis.it> - 4.7.0-1
+- Bump version 4.7.0
+ 
 * Mon Jun 26 2017 Davide Principi <davide.principi@nethesis.it> - 4.6.5-1
 - Bump version 4.6.5
 
@@ -90,4 +94,3 @@ popd
 
 * Wed Jan 27 2016 Davide Principi <davide.principi@nethesis.it>
 - Initial build
-
