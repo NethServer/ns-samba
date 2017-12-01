@@ -1,0 +1,16 @@
+
+# Print a . every N lines
+
+N=${1:-1000}
+
+if which fold &>/dev/null; then
+    fold=fold
+else
+    fold=cat
+fi
+
+while read line; do
+    if (( ++i % $N)); then
+        echo -n .
+    fi
+done | $fold

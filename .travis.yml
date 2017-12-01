@@ -15,9 +15,12 @@ env:
 script: >
     docker run -ti --name makerpms ${EVARS}
     --hostname "b${TRAVIS_BUILD_NUMBER}.nethserver.org"
-    --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} makerpms-travis -s *.spec 
+    --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} makerpms-travis -s *.spec | tee build.log | ./buildprogress
     && docker cp makerpms:/srv/makerpms/rpmbuild rpmbuild 
     && find rpmbuild -name 'ns-samba-*.rpm' | xargs -I FILE -- cp -v FILE .
+
+after_failure:
+    cat build.log
 
 deploy:
   provider: releases
@@ -25,6 +28,8 @@ deploy:
   api_key:
     secure: Vbht1GAg40xHhLfEqtMrJR61Vg1Xpnd3dVK+KbCQwGn+qwmqFz2JcECBpEWDjl6ss1j2fmhHUmUHq2mN+8tUQITiOhSIVT8HBVBeZ/iY2m6LNBNFkH8uNpgf+M6KoL8h1ufmMGOyU3rPEa4ga1P4r09J0pbYE5GfaISgdvM5A6dANWn6n+mo5WF1rfaIwhbJ9TG2W8O3rxHrPsbjaJmj+wHnsYbUr1qnBrz2/HeBgwFBK+UBKUqlfxQelGbkx/NiWkABxBhL7JUrnV8X75hEhxGTohpMQ2m5Prveqm3HNdsAzwqB7kboF0+QEwooAbpKaIlBrXVeAcV2W6HY3NplBOwftewpipNtN4XHVsxIRmcdOQkLW+4NMP4teozWk0QEsuwks6Eoq86ThDxAaRj5JGJq6y5YHlp3yfoxyLluzi1lwbFmPxnd3+kdh3THwKX18BcjDn7uhX1R+5khjDbMRFI8FgEOraatmPmdMEVF7DPF6P8NHhv6yAbp+v5Z8pqpUt2cmUb4rz8meTmZvEt7ZIwqWYr818000JIcqBbZm77qRJBkZKppa9MFmcwDtlB7ULRygaVvkML6E/mDu0oQEQxsJ1lJmggTqJpyWIjnQlLqTqXIhuLEQJjFQe7K97afw7iZbRzmO2bDcO2caQ8DNMpKEpSy6j/O/kJ1PVFPHNs=
   file_glob: true
-  file: ns-samba-*.rpm
+  file: 
+      - ns-samba-*.rpm
+      - build.log
   on:
     tags: true
