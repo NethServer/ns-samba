@@ -15,12 +15,12 @@ env:
 script: >
     docker run -ti --name makerpms ${EVARS}
     --hostname "b${TRAVIS_BUILD_NUMBER}.nethserver.org"
-    --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} makerpms-travis -s *.spec | tee build.log | ./buildprogress
+    --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} makerpms-travis -s *.spec | tee build.log
     && docker cp makerpms:/srv/makerpms/rpmbuild rpmbuild 
     && find rpmbuild -name 'ns-samba-*.rpm' | xargs -I FILE -- cp -v FILE .
 
 after_failure:
-    cat build.log
+    tail build.log
 
 deploy:
   provider: releases
