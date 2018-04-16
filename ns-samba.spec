@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.7.0
+Version: 4.7.6
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
