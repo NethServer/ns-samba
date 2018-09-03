@@ -22,6 +22,10 @@ script: >
 after_failure:
     tail build.log
 
+branches:
+  except:
+    - master
+
 deploy:
   provider: releases
   skip_cleanup: true
