@@ -1,5 +1,5 @@
 [Unit]
-Description=Samba domain controller daemon
+Description=Namespaced Samba domain controller
 After=syslog.target network.target
 ConditionPathExists=/var/lib/samba/private/krb5.conf
 ConditionPathExists=/etc/samba/smb.conf

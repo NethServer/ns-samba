@@ -1,21 +1,30 @@
 Name: ns-samba
 Version: 4.8.6
 Release: 1%{?dist}
-Summary: Samba vanilla build
+Summary: Namespaced Samba AD domain controller
 
 License: GPLv3+
 URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 Source1: https://download.samba.org/pub/samba/stable/samba-%{version}.tar.gz
 
-BuildRequires: nethserver-devtools
-BuildRequires: python-devel
-BuildRequires: systemd-devel
-BuildRequires: gnutls-devel
 BuildRequires: docbook-xsl
+BuildRequires: gnutls-devel
+BuildRequires: gpgme-devel
+BuildRequires: jansson
+BuildRequires: jansson-devel
 BuildRequires: libacl-devel
+BuildRequires: libarchive-devel
+BuildRequires: lmdb
+BuildRequires: lmdb-devel
+BuildRequires: nethserver-devtools
 BuildRequires: openldap-devel
 BuildRequires: pam-devel
+BuildRequires: pygpgme
+BuildRequires: python-devel
+BuildRequires: systemd-devel
+
+
 
 BuildRequires: systemd
 Requires(post): systemd
@@ -24,7 +33,9 @@ Requires(postun): systemd
 Requires: bind-utils
 
 %description
-This is is a vanilla samba-%{version} build for NethServer 7
+This is a Samba %{version} domain controller build for CentOS that runs in
+separate Linux namespaces. It requires a network bridge to attach its private
+interface and it can coexists with the existing samba daemons.
 
 %prep
 %setup 
@@ -32,7 +43,7 @@ This is is a vanilla samba-%{version} build for NethServer 7
 
 %build
 cd %{_builddir}/samba-%{version}
-%configure --with-systemd --enable-fhs 
+./configure --prefix=/opt/%{name} --localstatedir=/var/lib/%{name} --sysconfdir=/etc/%{name} --with-systemd
 make %{?_smp_mflags}
 
 %install
@@ -44,13 +55,13 @@ pushd %{_builddir}/samba-%{version}
 %make_install
 popd
 
-%{genfilelist} %{buildroot} > %{name}-%{version}.filelist
+%{genfilelist} %{buildroot} > %{name}.filelist
 
-%files -f %{name}-%{version}.filelist
+%files -f %{name}.filelist
 %defattr(-,root,root)
 %doc COPYING
-%dir /var/lib/samba
-%config(noreplace) %ghost %{_sysconfdir}/samba/smb.conf
+%dir /var/lib/%{name}
+%config(noreplace) %ghost %{_sysconfdir}/%{name}/smb.conf
 
 %post
 %systemd_post samba.service
