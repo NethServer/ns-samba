@@ -4,7 +4,7 @@ services:
     - docker
 branches:
     only:
-        - master
+        - nsdc
 env:
    global:
     - DEST_ID=core
