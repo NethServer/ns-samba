@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.8.12
+Version: 4.9.13
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
@@ -16,6 +16,9 @@ BuildRequires: docbook-xsl
 BuildRequires: libacl-devel
 BuildRequires: openldap-devel
 BuildRequires: pam-devel
+BuildRequires: jansson-devel
+BuildRequires: gpgme-devel
+BuildRequires: libarchive-devel
 
 BuildRequires: systemd
 Requires(post): systemd
@@ -28,11 +31,11 @@ This is is a vanilla samba-%{version} build for NethServer 7
 
 %prep
 %setup 
-%setup -D -T -b 1
+%setup -q -D -T -b 1
 
 %build
 cd %{_builddir}/samba-%{version}
-%configure --with-systemd --enable-fhs 
+%configure --with-systemd --enable-fhs --without-ldb-lmdb
 make %{?_smp_mflags}
 
 %install
@@ -62,8 +65,8 @@ popd
 %systemd_postun
 
 %changelog
-* Wed May 15 2019 Davide Principi <davide.principi@nethesis.it> - 4.8.12-1
-- Release 4.8.12
+* Thu Sep 19 2019 Davide Principi <davide.principi@nethesis.it> - 4.9.13-1
+- Bump version 4.9.13
 
 * Wed May 15 2019 Davide Principi <davide.principi@nethesis.it> - 4.8.12-1
 - Bump version 4.8.12
