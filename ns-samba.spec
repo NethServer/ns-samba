@@ -63,6 +63,9 @@ popd
 
 %changelog
 * Wed May 15 2019 Davide Principi <davide.principi@nethesis.it> - 4.8.12-1
+- Release 4.8.12
+
+* Wed May 15 2019 Davide Principi <davide.principi@nethesis.it> - 4.8.12-1
 - Bump version 4.8.12
 
 * Mon Feb 18 2019 Davide Principi <davide.principi@nethesis.it> - 4.8.9-1
