@@ -65,6 +65,9 @@ popd
 %systemd_postun
 
 %changelog
+* Tue Feb  4 2019 Davide Principi <davide.principi@nethesis.it> - 4.9.18-1
+- Bump version 4.9.18
+
 * Thu Sep 19 2019 Davide Principi <davide.principi@nethesis.it> - 4.9.13-1
 - Bump version 4.9.13
 
