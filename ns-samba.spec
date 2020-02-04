@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.9.13
+Version: 4.9.18
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
