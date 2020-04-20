@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.9.18
+Version: 4.11.7
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
@@ -8,8 +8,11 @@ URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 Source1: https://download.samba.org/pub/samba/stable/samba-%{version}.tar.gz
 
+# Turn off the brp-python-bytecompile automagic
+%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+
 BuildRequires: nethserver-devtools
-BuildRequires: python-devel
+BuildRequires: python3-devel
 BuildRequires: systemd-devel
 BuildRequires: gnutls-devel
 BuildRequires: docbook-xsl
@@ -65,6 +68,9 @@ popd
 %systemd_postun
 
 %changelog
+* Fri Apr 17 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 4.11.7-1
+- Bump version 4.11.7
+
 * Tue Feb  4 2020 Davide Principi <davide.principi@nethesis.it> - 4.9.18-1
 - Bump version 4.9.18
 
