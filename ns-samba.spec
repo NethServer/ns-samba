@@ -50,7 +50,7 @@ pushd %{_builddir}/samba-%{version}
 %make_install
 popd
 
-%{genfilelist} %{buildroot} > %{name}-%{version}.filelist
+%{genfilelist} %{buildroot} | grep -v -e '.pyo$' -e '.pyc$' > %{name}-%{version}.filelist
 
 %files -f %{name}-%{version}.filelist
 %defattr(-,root,root)
