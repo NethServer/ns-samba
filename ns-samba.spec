@@ -1,5 +1,5 @@
 Name: ns-samba
-Version: 4.11.7
+Version: 4.16.5
 Release: 1%{?dist}
 Summary: Samba vanilla build
 
@@ -12,9 +12,9 @@ Source1: https://download.samba.org/pub/samba/stable/samba-%{version}.tar.gz
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 
 BuildRequires: nethserver-devtools
-BuildRequires: python3-devel
+BuildRequires: python36-devel python36-markdown python36-dns
 BuildRequires: systemd-devel
-BuildRequires: gnutls-devel
+BuildRequires: compat-gnutls37-devel
 BuildRequires: docbook-xsl
 BuildRequires: libacl-devel
 BuildRequires: openldap-devel
@@ -22,6 +22,9 @@ BuildRequires: pam-devel
 BuildRequires: jansson-devel
 BuildRequires: gpgme-devel
 BuildRequires: libarchive-devel
+BuildRequires: zlib-devel
+BuildRequires: perl-Parse-Yapp  perl-JSON
+BuildRequires: popt-devel
 
 BuildRequires: systemd
 Requires(post): systemd
@@ -37,8 +40,9 @@ This is is a vanilla samba-%{version} build for NethServer 7
 %setup -q -D -T -b 1
 
 %build
+export LANG=en_US.UTF-8
 cd %{_builddir}/samba-%{version}
-%configure --with-systemd --enable-fhs --without-ldb-lmdb
+%configure --with-systemd --enable-fhs --without-ldb-lmdb --with-shared-modules='!vfs_snapper'
 make %{?_smp_mflags}
 
 %install
