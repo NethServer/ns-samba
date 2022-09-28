@@ -7,7 +7,7 @@ ConditionPathExists=/etc/samba/smb.conf
 [Service]
 LimitNOFILE=16384
 EnvironmentFile=-/etc/sysconfig/samba
-ExecStart=/usr/sbin/samba $SAMBAOPTIONS -i --debug-stderr
+ExecStart=/usr/sbin/samba $SAMBAOPTIONS -i --debug-stdout
 ExecReload=/usr/bin/kill -HUP $MAINPID
 SuccessExitStatus=127
 
