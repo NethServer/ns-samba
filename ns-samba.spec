@@ -31,6 +31,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires: bind-utils
+Requires: python36-dns
 
 %description
 This is is a vanilla samba-%{version} build for NethServer 7
