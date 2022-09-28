@@ -22,8 +22,6 @@ BuildRequires: pam-devel
 BuildRequires: jansson-devel
 BuildRequires: gpgme-devel
 BuildRequires: libarchive-devel
-BuildRequires: flex
-BuildRequires: bison
 BuildRequires: zlib-devel
 BuildRequires: perl-Parse-Yapp  perl-JSON
 BuildRequires: popt-devel
@@ -42,10 +40,9 @@ This is is a vanilla samba-%{version} build for NethServer 7
 %setup -q -D -T -b 1
 
 %build
-export LANG=en_US.UTF-8
 cd %{_builddir}/samba-%{version}
 %configure --with-systemd --enable-fhs --without-ldb-lmdb --with-shared-modules='!vfs_snapper'
-LANG=en_US.UTF-8 make %{?_smp_mflags}
+make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}

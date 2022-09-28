@@ -10,11 +10,12 @@ env:
     EVARS="
     -e DEST_ID -e TRAVIS_BRANCH -e TRAVIS_BUILD_ID -e TRAVIS_PULL_REQUEST_BRANCH
     -e TRAVIS_PULL_REQUEST -e TRAVIS_REPO_SLUG -e TRAVIS_TAG -e NSVER -e VERSIONS_PACK
-    -e STAGES_PACK"
+    -e STAGES_PACK -e YUM_ARGS=@development -e LANG=en_US.UTF-8"
 
 script: >
     docker run -ti --name makerpms ${EVARS}
     --hostname "b${TRAVIS_BUILD_NUMBER}.nethserver.org"
+    --volume $PWD/copr.repo:/etc/yum.repos.d/copr.repo
     --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} makerpms-travis -s *.spec | tee build.log
     && docker cp makerpms:/srv/makerpms/rpmbuild rpmbuild 
     && find rpmbuild -name 'ns-samba-*.rpm' | xargs -I FILE -- cp -v FILE .
