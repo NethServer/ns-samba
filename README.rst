@@ -15,7 +15,7 @@ How to build
 
 2. Create needed tarballs ::
 
-    export sambaver=`grep sambaver ns-samba.spec | head -n 1 | awk '{print $3}'`
+    export sambaver=`grep Version ns-samba.spec | cut -d ':' -f 2 | tr -d ' '`
     git archive --format=tar --prefix=ns-samba-$sambaver/ HEAD | tar xf -
     tar -c -z --exclude-vcs --exclude='.gitignore' -f  ns-samba-$sambaver.tar.gz ns-samba-$sambaver
     rm -rf ns-samba-$sambaver
