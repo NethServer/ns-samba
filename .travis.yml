@@ -10,7 +10,7 @@ env:
     EVARS="
     -e DEST_ID -e TRAVIS_BRANCH -e TRAVIS_BUILD_ID -e TRAVIS_PULL_REQUEST_BRANCH
     -e TRAVIS_PULL_REQUEST -e TRAVIS_REPO_SLUG -e TRAVIS_TAG -e NSVER -e VERSIONS_PACK
-    -e STAGES_PACK -e YUM_ARGS=@development -e LANG=en_US.UTF-8"
+    -e STAGES_PACK -e YUM_ARGS=@development"
 
 script: >
     docker run -ti --name makerpms ${EVARS}

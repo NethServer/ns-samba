@@ -40,6 +40,7 @@ This is is a vanilla samba-%{version} build for NethServer 7
 %setup -q -D -T -b 1
 
 %build
+export LANG=en_US.UTF-8
 cd %{_builddir}/samba-%{version}
 %configure --with-systemd --enable-fhs --without-ldb-lmdb --with-shared-modules='!vfs_snapper'
 make %{?_smp_mflags}
