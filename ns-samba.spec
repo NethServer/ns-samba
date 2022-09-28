@@ -72,6 +72,9 @@ popd
 %systemd_postun
 
 %changelog
+* Wed Sep 28 2022 Davide Principi <davide.principi@nethesis.it> - 4.16.5-1
+- Bump version 4.16.5
+
 * Fri Apr 17 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 4.11.7-1
 - Bump version 4.11.7
 
