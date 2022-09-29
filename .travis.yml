@@ -29,6 +29,7 @@ branches:
 
 deploy:
   provider: releases
+  edge: true
   skip_cleanup: true
   file_glob: true
   file: 
