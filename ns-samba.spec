@@ -61,8 +61,8 @@ popd
 %defattr(-,root,root)
 %doc COPYING
 %dir /var/lib/samba
-%config(noreplace) %ghost %{_sysconfdir}/samba/smb.conf
-%config(noreplace) %{_sysconfdir}/crypto-policies/back-ends/gnutls.config
+%config(noreplace) %ghost /etc/samba/smb.conf
+%config(noreplace) /etc/crypto-policies/back-ends/gnutls.config
 
 %post
 %systemd_post samba.service

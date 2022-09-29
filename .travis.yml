@@ -30,7 +30,9 @@ branches:
 deploy:
   provider: releases
   edge: true
-  skip_cleanup: true
+  overwrite: true
+  draft: true
+  cleanup: false
   file_glob: true
   file: 
       - ns-samba-*.rpm
