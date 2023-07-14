@@ -33,6 +33,8 @@ Requires(postun): systemd
 Requires: bind-utils
 Requires: python36-dns
 
+Patch0: bug_15418.patch
+
 %description
 This is is a vanilla samba-%{version} build for NethServer 7
 
@@ -43,6 +45,7 @@ This is is a vanilla samba-%{version} build for NethServer 7
 %build
 export LANG=en_US.UTF-8
 cd %{_builddir}/samba-%{version}
+patch -p1 --fuzz 1 < %{PATCH0}
 %configure --with-systemd --enable-fhs --without-ldb-lmdb --with-shared-modules='!vfs_snapper'
 make %{?_smp_mflags}
 
